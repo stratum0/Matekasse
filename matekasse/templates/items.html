@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container">
+        <div class="card bg-dark">
+            <div class="card-header">
+                Add Item
+            </div>
+            <div class="card-body">
+                <form method="post" action="" enctype="multipart/form-data">
+                    {{ additem.hidden_tag() }}
+                    <p>{{ additem.name.label }}: {{ additem.name }}</p>
+                    <p>{{ additem.price.label }}: {{ additem.price }}</p>
+                    <p>{{ additem.pic.label() }}: {{ additem.pic() }}</p>
+                    <p>{{ additem.submit }}</p>
+                </form>
+            </div>
+        </div>
+        <div class="card bg-dark">
+            <div class="card-header">
+                Item overview (Click on item to edit or delete)
+            </div>
+            <div class="card-body">
+                <div>
+                    {% for i in item %}
+                        <div class="useroverview items" onclick="location.href='{{ url_for('item.edititem', item_id=i.id) }}'">
+                            <img class="rounded-circle article-img image" src="{{ url_for('static', filename='item_pics/' + i.imgfile) }}">
+                            <div>{{ i.name }}</div>
+                            <div>{{ i.price }}&euro;</div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

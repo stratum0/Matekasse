@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container">
+        <div class="card bg-dark">
+            <div class="card-header">
+                Capacity
+            </div>
+            <div class="card-body">
+                {% set count = namespace(value=0) %}
+                {% for cap in user %}
+                    {% set count.value = count.value + cap.credit %}
+                {% endfor %}
+                {{ count.value }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

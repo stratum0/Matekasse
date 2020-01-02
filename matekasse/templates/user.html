@@ -1,0 +1,148 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 bg-dark">
+            <p>{{ user.username }}</p>
+            <p>{{ user.credit }}</p>
+        </div>
+        <div class="col-md-9">
+            <div class="accordion" id="accordionExample">
+                <div class="card bg-dark">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Buy
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            {% for i in item %}
+                                <div class="useroverview items" onclick="location.href='{{ url_for('user.buyitem', user_id=user.id, item_id=i.id) }}'">
+                                    <img class="rounded-circle article-img image" src="{{ url_for('static', filename='item_pics/' + i.imgfile) }}">
+                                    <div>{{ i.name }}</div>
+                                    <div>{{ i.price }}&euro;</div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-dark">
+                    <div class="card-header" id="headingTwo">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                Credit
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <form method="post" action="">
+                                {{ creditform.hidden_tag() }}
+                                <p>Add</p>
+                                {{ creditform.addzerofive(class="btn btn-success") }}
+                                {{ creditform.addone(class="btn btn-success") }}
+                                {{ creditform.addonefive(class="btn btn-success") }}
+                                {{ creditform.addtwo(class="btn btn-success") }}
+                                {{ creditform.addthree(class="btn btn-success") }}
+                                {{ creditform.addfour(class="btn btn-success") }}
+                                {{ creditform.addfive(class="btn btn-success") }}
+                                {{ creditform.addten(class="btn btn-success") }}
+                                {{ creditform.addtwenty(class="btn btn-success") }}
+                                {{ creditform.addfifty(class="btn btn-success") }}
+                                <p>Remove</p>
+                                {{ creditform.remzerofive(class="btn btn-danger") }}
+                                {{ creditform.remone(class="btn btn-danger") }}
+                                {{ creditform.remonefive(class="btn btn-danger") }}
+                                {{ creditform.remtwo(class="btn btn-danger") }}
+                                {{ creditform.remthree(class="btn btn-danger") }}
+                                {{ creditform.remfour(class="btn btn-danger") }}
+                                {{ creditform.remfive(class="btn btn-danger") }}
+                                {{ creditform.remten(class="btn btn-danger") }}
+                                {{ creditform.remtwenty(class="btn btn-danger") }}
+                                {{ creditform.remfifty(class="btn btn-danger") }}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-dark">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                Transfer
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <form method="post" action="">
+                                {{ transferform.hidden_tag() }}
+                                <div>
+                                    <p>{{ transferform.beneficary.label }}: {{ transferform.beneficary }}</p>
+                                </div>
+                                {{ transferform.transferzerofive(class="btn btn-success") }}
+                                {{ transferform.transferone(class="btn btn-success") }}
+                                {{ transferform.transferonefive(class="btn btn-success") }}
+                                {{ transferform.transfertwo(class="btn btn-success") }}
+                                {{ transferform.transferthree(class="btn btn-success") }}
+                                {{ transferform.transferfour(class="btn btn-success") }}
+                                {{ transferform.transferfive(class="btn btn-success") }}
+                                {{ transferform.transferten(class="btn btn-success") }}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-dark">
+                    <div class="card-header" id="headingFour">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                History
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                        <div class="card-body">
+                                <table>
+                                    <thead>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Transaction</th>
+                                        <th scope="col">Date</th>
+                                    </thead>
+                                    <tbody>
+                            {% for trans in transaction %}
+                                        <tr>
+                                            <th scope="row">{{ loop.index }}</th>
+                                            <td>{{ trans.credit }}&euro;</td>
+                                            <td>{{ trans.date }}</td>
+                                        </tr>
+                            {% endfor %}
+                                    </tbody>
+                                </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-dark">
+                    <div class="card-header" id="headingFive">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                Options
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <form method="post" action="">
+                                {{ edit.hidden_tag() }}
+                                <p>{{ edit.rename.label() }}: {{ edit.rename(value=user.username) }}</p>
+                                <p>{{ edit.edit(class="btn btn-success btn-block") }} {{ edit.delete(class="btn btn-danger btn-block") }}</p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

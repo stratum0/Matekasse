@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="editItem">
+        <div class="card bg-dark">
+            <div class="card-header">
+                Edit Item
+            </div>
+            <div class="card-body">
+                <form method="post" action="" enctype="multipart/form-data">
+                    {{ moditem.hidden_tag() }}
+                    <div style="text-align: center">
+                        <p><img class="rounded-circle article-img image" src="{{ url_for('static', filename='item_pics/' + item.imgfile) }}"></p>
+                        <p>{{ moditem.pic() }}</p>
+                    </div>
+                    <p>{{ moditem.name.label() }}: {{ moditem.name(value = item.name) }}</p>
+                    <p>{{ moditem.price.label() }}: {{ moditem.price(value = item.price) }}</p>
+                    <p>{{ moditem.submit(class="btn btn-success btn-block") }} {{ moditem.delete(class="btn btn-danger btn-block") }}</p>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

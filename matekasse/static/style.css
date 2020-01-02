@@ -1,0 +1,34 @@
+body {
+    background: #3d444a;
+    color: #999c9f;
+}
+
+.newuser {
+    margin-top: -10px;
+    font-size: 70px;
+    text-align: center;
+}
+
+.items {
+    display: inline-block;
+    text-align: center;
+}
+
+.useroverview {
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: #343a40
+}
+.user {
+    margin-top: 5px;
+    font-size: 20px;
+}
+
+.editItem {
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+}
