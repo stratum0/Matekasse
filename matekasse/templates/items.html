@@ -9,9 +9,10 @@
                 <form method="post" action="" enctype="multipart/form-data">
                     {{ additem.hidden_tag() }}
                     <p>{{ additem.name.label }}: {{ additem.name }}</p>
-                    <p>{{ additem.price.label }}: {{ additem.price }}</p>
+                    <p>{{ additem.price.label }}*: {{ additem.price }}</p>
                     <p>{{ additem.pic.label() }}: {{ additem.pic() }}</p>
                     <p>{{ additem.submit }}</p>
+                    <p>* use . not ,</p>
                 </form>
             </div>
         </div>
@@ -25,7 +26,7 @@
                         <div class="useroverview items" onclick="location.href='{{ url_for('item.edititem', item_id=i.id) }}'">
                             <img class="rounded-circle article-img image" src="{{ url_for('static', filename='item_pics/' + i.imgfile) }}">
                             <div>{{ i.name }}</div>
-                            <div>{{ i.price }}&euro;</div>
+                            <div>{{'%0.2f'| format(i.price / 100|float) }}&euro;</div>
                         </div>
                     {% endfor %}
 

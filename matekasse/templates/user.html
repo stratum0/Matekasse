@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-3 bg-dark">
             <p>{{ user.username }}</p>
-            <p>{{ user.credit }}</p>
+            <p>{{'%0.2f'| format(user.credit / 100|float) }}&euro;</p>
         </div>
         <div class="col-md-9">
             <div class="accordion" id="accordionExample">
@@ -22,7 +22,7 @@
                                 <div class="useroverview items" onclick="location.href='{{ url_for('user.buyitem', user_id=user.id, item_id=i.id) }}'">
                                     <img class="rounded-circle article-img image" src="{{ url_for('static', filename='item_pics/' + i.imgfile) }}">
                                     <div>{{ i.name }}</div>
-                                    <div>{{ i.price }}&euro;</div>
+                                    <div>{{'%0.2f'| format(i.price / 100|float) }}&euro;</div>
                                 </div>
                             {% endfor %}
 
@@ -39,31 +39,18 @@
                     </div>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                         <div class="card-body">
-                            <form method="post" action="">
-                                {{ creditform.hidden_tag() }}
-                                <p>Add</p>
-                                {{ creditform.addzerofive(class="btn btn-success") }}
-                                {{ creditform.addone(class="btn btn-success") }}
-                                {{ creditform.addonefive(class="btn btn-success") }}
-                                {{ creditform.addtwo(class="btn btn-success") }}
-                                {{ creditform.addthree(class="btn btn-success") }}
-                                {{ creditform.addfour(class="btn btn-success") }}
-                                {{ creditform.addfive(class="btn btn-success") }}
-                                {{ creditform.addten(class="btn btn-success") }}
-                                {{ creditform.addtwenty(class="btn btn-success") }}
-                                {{ creditform.addfifty(class="btn btn-success") }}
-                                <p>Remove</p>
-                                {{ creditform.remzerofive(class="btn btn-danger") }}
-                                {{ creditform.remone(class="btn btn-danger") }}
-                                {{ creditform.remonefive(class="btn btn-danger") }}
-                                {{ creditform.remtwo(class="btn btn-danger") }}
-                                {{ creditform.remthree(class="btn btn-danger") }}
-                                {{ creditform.remfour(class="btn btn-danger") }}
-                                {{ creditform.remfive(class="btn btn-danger") }}
-                                {{ creditform.remten(class="btn btn-danger") }}
-                                {{ creditform.remtwenty(class="btn btn-danger") }}
-                                {{ creditform.remfifty(class="btn btn-danger") }}
-                            </form>
+                            <p>Add</p>
+                            {% for credit in poscredit %}
+                                <div class="btn btn-success" onclick="location.href='{{ url_for('user.addcredits', user_id=user.id, sign='+', new_credit=credit.credit) }}'">
+                                    <div>{{'%0.2f'| format(credit.credit / 100 |float) }}&euro;</div>
+                                </div>
+                            {% endfor %}
+                            <p>Remove</p>
+                            {% for credit in negcredit %}
+                                <div class="btn btn-danger" onclick="location.href='{{ url_for('user.addcredits', user_id=user.id, sign='-', new_credit=credit.credit) }}'">
+                                    <div>{{'%0.2f'| format(credit.credit / 100 * -1|float) }}&euro;</div>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -80,16 +67,10 @@
                             <form method="post" action="">
                                 {{ transferform.hidden_tag() }}
                                 <div>
-                                    <p>{{ transferform.beneficary.label }}: {{ transferform.beneficary }}</p>
+                                    <p>{{ transferform.beneficary.label() }}: {{ transferform.beneficary() }}</p>
                                 </div>
-                                {{ transferform.transferzerofive(class="btn btn-success") }}
-                                {{ transferform.transferone(class="btn btn-success") }}
-                                {{ transferform.transferonefive(class="btn btn-success") }}
-                                {{ transferform.transfertwo(class="btn btn-success") }}
-                                {{ transferform.transferthree(class="btn btn-success") }}
-                                {{ transferform.transferfour(class="btn btn-success") }}
-                                {{ transferform.transferfive(class="btn btn-success") }}
-                                {{ transferform.transferten(class="btn btn-success") }}
+                                <p>{{ transferform.sum.label() }}: {{ transferform.sum() }}</p>
+                                <p>{{ transferform.transfer() }}</p>
                             </form>
                         </div>
                     </div>
@@ -114,7 +95,7 @@
                             {% for trans in transaction %}
                                         <tr>
                                             <th scope="row">{{ loop.index }}</th>
-                                            <td>{{ trans.credit }}&euro;</td>
+                                            <td>{{'%0.2f'| format(trans.credit / 100|float) }}&euro;</td>
                                             <td>{{ trans.date }}</td>
                                         </tr>
                             {% endfor %}

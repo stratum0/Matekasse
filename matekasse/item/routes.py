@@ -2,30 +2,16 @@ from flask import Blueprint, render_template, current_app, flash, redirect, url_
 from matekasse import db
 from matekasse.models import Item
 from matekasse.item.forms import AddItem, EditItem
-import os
-import secrets
-from PIL import Image
+from matekasse.utils.pictures import savePicture, delPicture
 
 item = Blueprint('item', __name__)
 
 
-def savePicture(pic):
-    random_hex = secrets.token_hex(8)
-    f_name, f_ext = os.path.splitext(pic.filename)
-    picture_fn = random_hex + f_ext
-    picture_path = os.path.join(current_app.root_path, 'static/item_pics', picture_fn)
-    output_size = (125, 125)
-    i = Image.open(pic)
-    i.thumbnail(output_size)
-    i.save(picture_path)
-    return picture_fn
-
 @item.route("/items", methods=['Post', 'Get'])
 def itemoverview():
     additem = AddItem()
-    print(additem.validate_on_submit())
     if additem.validate_on_submit():
-        newitem = Item(name=additem.name.data, price=additem.price.data)
+        newitem = Item(name=additem.name.data, price=additem.price.data * 100)
         if additem.pic.data:
             newitem.imgfile = savePicture(additem.pic.data)
         db.session.add(newitem)
@@ -42,10 +28,12 @@ def edititem(item_id):
     itm = Item.query.get_or_404(item_id)
     if moditem.validate_on_submit():
         if moditem.delete.data:
+            if itm.imgfile != 'default.svg':
+                delPicture(itm.imgfile)
             db.session.delete(itm)
         if moditem.submit.data:
             itm.name = moditem.name.data
-            itm.price = moditem.price.data
+            itm.price = moditem.price.data * 100
             if moditem.pic.data:
                 itm.imgfile = savePicture(moditem.pic.data)
         db.session.commit()

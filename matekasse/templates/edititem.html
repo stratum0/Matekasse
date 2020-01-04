@@ -13,8 +13,9 @@
                         <p>{{ moditem.pic() }}</p>
                     </div>
                     <p>{{ moditem.name.label() }}: {{ moditem.name(value = item.name) }}</p>
-                    <p>{{ moditem.price.label() }}: {{ moditem.price(value = item.price) }}</p>
+                    <p>{{ moditem.price.label() }}*: {{ moditem.price(value = '%0.2f'| format(item.price / 100|float)) }}</p>
                     <p>{{ moditem.submit(class="btn btn-success btn-block") }} {{ moditem.delete(class="btn btn-danger btn-block") }}</p>
+                    <p>* use . not ,</p>
                 </form>
             </div>
         </div>
