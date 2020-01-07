@@ -7,3 +7,6 @@ A complete installer will follow...
 
 How to use the migration tool:  
 `python migrate_from_fnordcredit.py -p <Path_to_Fnordcredit_db>`
+
+## How to install
+1. ``
