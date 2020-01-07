@@ -1,4 +1,6 @@
+wheel
 Flask
 flask-sqlalchemy
 Flask-WTF
 Pillow
+gunicorn

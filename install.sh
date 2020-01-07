@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
+apt install -y python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools python3-venv nginx
+adduser matekasse --system --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --shell /bin/bash
+
+/bin/su -c "git clone https://github.com/stratum0/Matekasse.git" - matekasse
+
+python3 /home/matekasse/Matekasse/installfoo/genconfig.py
+chown matekasse:nogroup /var/lib/matekasse
+/bin/su -c "./installfoo/matekasse_user.sh" - matekasse
+
+cp /home/matekasse/Matekasse/installfoo/matekasse.service /etc/systemd/
+systemctl start matekasse
+systemctl enable matekasse
+
+cp /home/matekasse/Matekasse/installfoo/matekasse /etc/nginx/sites-available/
+ln -s /etc/nginx/sites-available/matekasse /etc/nginx/sites-enabled
+systemctl restart nginx

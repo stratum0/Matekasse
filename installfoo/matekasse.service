@@ -1,0 +1,14 @@
+[Unit]
+Description=Gunicorn instance to serve Matekasse
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/matekasse/Matekasse
+Environment="PATH=/home/matekasse/Matekasse/venv/bin"
+ExecStart=/home/matekasse/Matekasse/venv/bin/gunicorn --workers 3 --bind unix:Matekasse.sock -m 007 app:app
+
+[Install]
+WantedBy=multi-user.target
+
