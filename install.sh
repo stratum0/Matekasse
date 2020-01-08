@@ -25,3 +25,4 @@ if [ -f "$FILE" ]; then
     rm $FILE
 fi
 systemctl restart nginx
+/bin/su -c "rm -rf ~/Matekasse/installfoo/" - matekasse
