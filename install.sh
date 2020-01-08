@@ -8,7 +8,7 @@ fi
 apt install -y python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools python3-venv nginx
 adduser matekasse --system --gecos "Matekasse,,," --shell /bin/bash
 
-/bin/su -c "git clone https://github.com/stratum0/Matekasse.git" - matekasse
+/bin/su -c "git clone -b installer https://github.com/stratum0/Matekasse.git" - matekasse
 
 python3 /home/matekasse/Matekasse/installfoo/genconfig.py
 chown matekasse:nogroup /var/lib/matekasse
