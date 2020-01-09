@@ -117,7 +117,12 @@
                             <form method="post" action="">
                                 {{ edit.hidden_tag() }}
                                 <p>{{ edit.rename.label() }}: {{ edit.rename(value=user.username) }}</p>
-                                <p>{{ edit.edit(class="btn btn-success btn-block") }} {{ edit.delete(class="btn btn-danger btn-block") }}</p>
+                                <p>
+                                    {{ edit.edit(class="btn btn-success btn-block") }}
+                                    {% if user.credit > 0 %}
+                                        {{ edit.delete(class="btn btn-danger btn-block") }}
+                                    {% endif %}
+                                </p>
                             </form>
                         </div>
                     </div>
