@@ -5,7 +5,7 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-apt install -y python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools python3-venv nginx
+apt install -y python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools python3-venv nginx libopenjp2-7-dev
 adduser matekasse --system --gecos "Matekasse,,," --shell /bin/bash
 
 /bin/su -c "git clone -b installer https://github.com/stratum0/Matekasse.git" - matekasse
