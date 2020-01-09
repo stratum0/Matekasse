@@ -10,7 +10,7 @@
                 {% for cap in user %}
                     {% set count.value = count.value + cap.credit %}
                 {% endfor %}
-                {{ count.value }}
+                {{'%0.2f'| format(count.value / 100|float) }}&euro;
             </div>
         </div>
     </div>

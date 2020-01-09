@@ -119,7 +119,7 @@
                                 <p>{{ edit.rename.label() }}: {{ edit.rename(value=user.username) }}</p>
                                 <p>
                                     {{ edit.edit(class="btn btn-success btn-block") }}
-                                    {% if user.credit > 0 %}
+                                    {% if user.credit >= 0 %}
                                         {{ edit.delete(class="btn btn-danger btn-block") }}
                                     {% endif %}
                                 </p>
