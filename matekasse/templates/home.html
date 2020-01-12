@@ -1,7 +1,15 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    {% for user in users %}
+    {% set sort = 'lastchange' %}
+    {% if request.args.get('sort') %}
+        {% set sort = request.args.get('sort') %}
+    {% endif %}
+    {% set desc = False %}
+    {% if request.args.get('order') == 'desc' %}
+        {% set desc = True %}
+    {% endif %}
+    {% for user in users|sort(attribute=sort, reverse=desc) %}
         {% if user.credit < 0 %}
         <div class="panel neg-panel" onclick="location.href='{{ url_for('user.userpage', user_id=user.id) }}'">
         {% else %}

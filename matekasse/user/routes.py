@@ -12,7 +12,7 @@ user = Blueprint('user', __name__)
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data)
+        user = User(username=form.username.data, lastchange=datetime.utcnow())
         db.session.add(user)
         db.session.commit()
         flash(f'Account created for {form.username.data}!', 'success')
@@ -78,6 +78,7 @@ def addcredits(user_id, sign, new_credit):
     if '-' in sign:
         new_credit = new_credit * -1
     usr.credit += new_credit
+    usr.lastchange = datetime.utcnow()
     trans = Transaction(credit=new_credit, userid=user_id, date=datetime.utcnow())
     db.session.add(trans)
     db.session.commit()
@@ -89,6 +90,7 @@ def buyitem(user_id, item_id):
     usr = User.query.get_or_404(user_id)
     item = Item.query.get_or_404(item_id)
     usr.credit -= item.price
+    usr.lastchange = datetime.utcnow()
     trans = Transaction(credit=item.price * -1, userid=user_id, date=datetime.utcnow())
     db.session.add(trans)
     db.session.commit()

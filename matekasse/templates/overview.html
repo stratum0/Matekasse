@@ -10,7 +10,7 @@
                     {% if cap.credit < 0 %}
                         {% set debit.value = debit.value + cap.credit %}
                     {% else %}
-                        {% set credit.value = credt.value + cap.credit %}
+                        {% set credit.value = credit.value + cap.credit %}
                     {% endif %}
                 {% endfor %}
             <div class="card-header">
