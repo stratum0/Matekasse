@@ -2,15 +2,34 @@
 {% block content %}
     <div class="container">
         <div class="card bg-dark">
+                {% set balance = namespace(value=0) %}
+                {% set credit = namespace(value=0) %}
+                {% set debit = namespace(value=0) %}
+                {% for cap in user %}
+                    {% set balance.value = balance.value + cap.credit %}
+                    {% if cap.credit < 0 %}
+                        {% set debit.value = debit.value + cap.credit %}
+                    {% else %}
+                        {% set credit.value = credt.value + cap.credit %}
+                    {% endif %}
+                {% endfor %}
             <div class="card-header">
-                Capacity
+                Balance
             </div>
             <div class="card-body">
-                {% set count = namespace(value=0) %}
-                {% for cap in user %}
-                    {% set count.value = count.value + cap.credit %}
-                {% endfor %}
-                {{'%0.2f'| format(count.value / 100|float) }}&euro;
+                {{'%0.2f'| format(balance.value / 100|float) }}&euro;
+            </div>
+            <div class="card-header">
+                Total Credit
+            </div>
+            <div class="card-body">
+                {{'%0.2f'| format(credit.value / 100|float) }}&euro;
+            </div>
+            <div class="card-header">
+                Total Debit
+            </div>
+            <div class="card-body">
+                {{'%0.2f'| format(debit.value / 100|float) }}&euro;
             </div>
         </div>
     </div>
