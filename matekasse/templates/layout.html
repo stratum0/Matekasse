@@ -37,6 +37,17 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('item.itemoverview') }}"><span class="glyphicon glyphicon-plus-sign"></span></a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sort
+                            </a>
+                            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#"><span class="glyphicon glyphicon glyphicon-sort-by-alphabet"></span></a>
+                                <a class="dropdown-item" href="#"><span class="glyphicon glyphicon glyphicon-sort-by-alphabet-alt"></span></a>
+                                <a class="dropdown-item" href="#"><span class="glyphicon glyphicon glyphicon-sort-by-order"></span></a>
+                                <a class="dropdown-item" href="#"><span class="glyphicon glyphicon glyphicon-sort-by-order-alt"></span></a>
+                            </div>
+                        </li>
                         {% endif %}
                     </ul>
                     {% if request.path == url_for('main.home') %}
