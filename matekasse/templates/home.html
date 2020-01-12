@@ -2,7 +2,11 @@
 
 {% block content %}
     {% for user in users %}
-        <div class="useroverview" onclick="location.href='{{ url_for('user.userpage', user_id=user.id) }}'">
+        {% if user.credit < 0 %}
+        <div class="panel neg-panel" onclick="location.href='{{ url_for('user.userpage', user_id=user.id) }}'">
+        {% else %}
+        <div class="panel" onclick="location.href='{{ url_for('user.userpage', user_id=user.id) }}'">
+        {% endif %}
             <div class="setMargin">
                 <img class="rounded-circle article-img image" src="{{ url_for('static', filename='item_pics/' + user.imgfile) }}">
                 <div>{{ user.username }}</div>
@@ -10,7 +14,7 @@
             </div>
         </div>
     {% endfor %}
-        <div class="useroverview" style="width: 125px" onclick="location.href='{{ url_for('user.register') }}'">
+        <div class="panel" style="width: 125px" onclick="location.href='{{ url_for('user.register') }}'">
             <div class="newuser">
                 +
             </div>
