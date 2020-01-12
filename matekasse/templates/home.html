@@ -2,15 +2,15 @@
 
 {% block content %}
     {% for user in users %}
-
-        <div class="col-8 col-sm-4 col-md-2 col-xl-1 panel panel-default useroverview" onclick="location.href='{{ url_for('user.userpage', user_id=user.id) }}'">
-            <div class="user">
-                <p>{{ user.username }}</p>
-                <p>{{'%0.2f'| format(user.credit / 100|float) }}&euro;</p>
+        <div class="useroverview" onclick="location.href='{{ url_for('user.userpage', user_id=user.id) }}'">
+            <div class="setMargin">
+                <img class="rounded-circle article-img image" src="{{ url_for('static', filename='item_pics/' + user.imgfile) }}">
+                <div>{{ user.username }}</div>
+                <div>{{'%0.2f'| format(user.credit / 100|float) }}&euro;</div>
             </div>
         </div>
     {% endfor %}
-        <div class="col-8 col-sm-4 col-md-2 col-xl-1 panel panel-default useroverview" onclick="location.href='{{ url_for('user.register') }}'">
+        <div class="useroverview" style="width: 125px" onclick="location.href='{{ url_for('user.register') }}'">
             <div class="newuser">
                 +
             </div>

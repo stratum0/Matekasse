@@ -23,7 +23,7 @@
             <div class="card-body">
                 <div>
                     {% for i in item %}
-                        <div class="useroverview items" onclick="location.href='{{ url_for('item.edititem', item_id=i.id) }}'">
+                        <div class="itemoverview items" onclick="location.href='{{ url_for('item.edititem', item_id=i.id) }}'">
                             <img class="rounded-circle article-img image" src="{{ url_for('static', filename='item_pics/' + i.imgfile) }}">
                             <div>{{ i.name }}</div>
                             <div>{{'%0.2f'| format(i.price / 100|float) }}&euro;</div>

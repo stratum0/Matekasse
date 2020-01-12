@@ -9,7 +9,12 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='glyphicons.css') }}">
         {% if request.path == url_for('user.register') %}
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='register.css') }}">
+        {% elif request.path == url_for('main.home') %}
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='useroverview.css') }}">
+        {% elif request.path == url_for('user.userpage') or request.path == url_for('item.itemoverview') %}
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='item.css') }}">
         {% endif %}
+
         <title>
             Matekasse
         </title>
