@@ -1,7 +1,6 @@
-from flask import Blueprint, render_template, redirect, url_for
+from matekasse.main import main
+from flask import render_template, redirect, url_for
 from matekasse.models import User
-
-main = Blueprint('main', __name__)
 
 
 @main.route("/")

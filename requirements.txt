@@ -3,3 +3,4 @@ flask-sqlalchemy
 Flask-WTF
 Pillow
 gunicorn
+Flask-SocketIO

@@ -1,7 +1,6 @@
-from flask import Blueprint, render_template, flash, redirect, url_for
+from flask import render_template
 from matekasse.models import User, Transaction
-
-overview = Blueprint('overview', __name__)
+from matekasse.overview import overview
 
 
 @overview.route("/overview")

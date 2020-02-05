@@ -1,10 +1,9 @@
-from flask import Blueprint, render_template, current_app, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for
 from matekasse import db
 from matekasse.models import Item
 from matekasse.item.forms import AddItem, EditItem
 from matekasse.utils.pictures import savePicture, delPicture
-
-item = Blueprint('item', __name__)
+from matekasse.item import item
 
 
 @item.route("/items", methods=['Post', 'Get'])

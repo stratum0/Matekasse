@@ -15,10 +15,10 @@
         {% else %}
         <div class="panel" onclick="location.href='{{ url_for('user.userpage', user_id=user.id) }}'">
         {% endif %}
-            <div class="setMargin">
+            <div class="setMargin" id="{{ user.id }}">
                 <img class="rounded-circle article-img image" src="{{ url_for('static', filename='item_pics/' + user.imgfile) }}">
-                <div>{{ user.username }}</div>
-                <div>{{'%0.2f'| format(user.credit / 100|float) }}&euro;</div>
+                <div id="username">{{ user.username }}</div>
+                <div id="credit">{{'%0.2f'| format(user.credit / 100|float) }}&euro;</div>
             </div>
         </div>
     {% endfor %}
@@ -27,4 +27,5 @@
                 +
             </div>
         </div>
+        <script src="{{ url_for('static', filename='js/home.js') }}"></script>
 {% endblock %}

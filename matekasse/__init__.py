@@ -1,8 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_socketio import SocketIO
 from matekasse.config import Config
 
 db = SQLAlchemy()
+socketio = SocketIO()
 
 
 def create_app(config_class=Config):
@@ -20,5 +22,6 @@ def create_app(config_class=Config):
     app.register_blueprint(overview)
     app.register_blueprint(item)
 
+    socketio.init_app(app)
     return app
 
