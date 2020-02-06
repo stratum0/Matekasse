@@ -7,7 +7,7 @@ User=matekasse
 Group=www-data
 WorkingDirectory=/home/matekasse/Matekasse
 Environment="PATH=/home/matekasse/Matekasse/venv/bin"
-ExecStart=/home/matekasse/Matekasse/venv/bin/gunicorn --workers 3 --bind unix:Matekasse.sock -m 007 app:app
+ExecStart=/home/matekasse/Matekasse/venv/bin/gunicorn -k gevent --workers 1 app:app
 
 [Install]
 WantedBy=multi-user.target

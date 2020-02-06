@@ -4,3 +4,4 @@ Flask-WTF
 Pillow
 gunicorn
 Flask-SocketIO
+gevent
